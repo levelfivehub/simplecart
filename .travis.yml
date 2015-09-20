@@ -5,12 +5,12 @@ php:
 - 7.0
 - 5.6
 - 5.5
-- 5.4
 - hhvm
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install
+  - php composer.phar dump-autoload
   - mkdir -p build/logs
 
 # Unit tests
