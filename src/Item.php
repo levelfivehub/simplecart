@@ -1,6 +1,7 @@
 <?php
 namespace SimpleCart;
 
+use SimpleCart\Exception\InvalidFieldException;
 use SimpleCart\Model\ItemModel;
 use SimpleCart\Validator\ItemValidator;
 
@@ -8,44 +9,52 @@ class Item
 {
 
     /**
-     * @var ItemValidator
+     * @param $uniqueId
+     * @param array $cartItems
+     * @return ItemModel
      */
-    private $itemValidator;
-
-    public function __construct()
+    public function getItemByUniqueId($uniqueId, array $cartItems)
     {
-        $this->itemValidator = new ItemValidator();
+        /** @var ItemModel $cart */
+        foreach ($cartItems as $cart) {
+            if ($cart->getUniqueId() == $uniqueId) {
+                return $cart;
+            }
+        }
+
+        throw new InvalidFieldException('Unique ID not found');
     }
 
     /**
-     * @param ItemModel|array $data
+     * @param array $data
      */
-    public function addItem($data)
+    public function getItemModel($data)
     {
         if (empty($data) || !is_array($data)) {
             throw new \InvalidArgumentException("Item to add is either empty or not an array");
         }
 
-        $this->itemValidator->setData($data);
-        $this->itemValidator->validate();
+        $itemValidator = new ItemValidator();
+        $itemValidator->setData($data);
+        $itemValidator->validate();
+
+        $item = $this->generateModel($data);
+
+        return $item;
     }
 
     /**
-     * @param $id
-     * @param $name
-     * @param $amount
-     * @param $quantity
-     * @param null $currency
+     * @param array $data
      * @return ItemModel
      */
-    public function generateModel($id, $name, $amount, $quantity, $currency = null)
+    private function generateModel($data)
     {
         $itemModel = new ItemModel();
-        $itemModel->setUniqueId($id)
-                  ->setName($name)
-                  ->setAmount($amount)
-                  ->setQuantity($quantity)
-                  ->setCurrency($currency);
+        $itemModel->setUniqueId($data['uniqueId'])
+                  ->setName($data['name'])
+                  ->setAmount($data['amount'])
+                  ->setQuantity($data['quantity'])
+                  ->setCurrency($data['currency']);
 
         return $itemModel;
     }
