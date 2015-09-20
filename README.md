@@ -1,2 +1,5 @@
-# simple-ticket-app
-Purchase tickets up to any defined quantity for any categorised event.
+# Simple Cart
+
+*This is currently in development.*
+
+Only in dev-master until further notice.
