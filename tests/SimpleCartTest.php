@@ -18,6 +18,8 @@ class SimpleCartTest extends \PHPUnit_Framework_TestCase {
 
     public function testAddItemToCart()
     {
+        $this->markTestIncomplete('Working on SimpleCart');
+
         $itemName = 'Red Balloon';
         $quantity = 5;
         $pricePerItem = '11.99';
