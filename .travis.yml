@@ -14,4 +14,4 @@ before_script:
 
 # Unit tests
 script:
-  - phpunit --coverage-clover build/logs/clover.xml
+  - ./phpunit --coverage-clover build/logs/clover.xml
