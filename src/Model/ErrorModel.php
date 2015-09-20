@@ -9,9 +9,9 @@ class ErrorModel {
     private $name;
 
     /**
-     * @var string
+     * @var array
      */
-    private $message;
+    private $messages;
 
     /**
      * @param string $name
@@ -35,18 +35,28 @@ class ErrorModel {
      * @param string $message
      * @return $this
      */
-    public function setMessage($message)
+    public function addMessage($message)
+    {
+        $this->messages[] = $message;
+        return $this;
+    }
+
+    /**
+     * @param array $message
+     * @return $this
+     */
+    public function setMessages($message)
     {
         $this->message = $message;
         return $this;
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getMessage()
+    public function getMessages()
     {
-        return $this->message;
+        return $this->messages;
     }
 
 }

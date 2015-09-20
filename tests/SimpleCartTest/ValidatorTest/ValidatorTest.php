@@ -5,7 +5,7 @@ use PHPUnit_Framework_TestCase;
 use SimpleCart\Model\ErrorModel;
 use SimpleCart\Validator\Validator;
 
-class ItemValidatorTest extends PHPUnit_Framework_TestCase {
+class ValidatorTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @var Validator
@@ -36,7 +36,20 @@ class ItemValidatorTest extends PHPUnit_Framework_TestCase {
         /** @var ErrorModel $error */
         foreach ($this->validator->getErrors() as $error) {
             $this->assertInstanceOf(ErrorModel::class, $error);
-            $this->assertEquals('Error Message', $error->getMessage());
+            $this->assertEquals('Error Message', current($error->getMessages()));
+        }
+
+        $this->validator->addError('Field', 'Second Error Message');
+
+        /** @var ErrorModel $error */
+        foreach ($this->validator->getErrors() as $error) {
+            $this->assertInstanceOf(ErrorModel::class, $error);
+
+            if ($error->getName() == 'Field') {
+                $this->assertCount(2, $error->getMessages());
+            } else {
+                $this->assertCount(1, $error->getMessages());
+            }
         }
     }
 

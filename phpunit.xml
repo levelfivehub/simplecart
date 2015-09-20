@@ -10,8 +10,16 @@
         stopOnFailure               = "false"
         syntaxCheck                 = "false">
     <testsuites>
-        <testsuite name="Simple Cart Suite">
-            <directory>tests</directory>
+        <testsuite name="SimpleCart Suite">
+            <directory>tests/SimpleCartTest</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="./clover.xml" />
+    </logging>
 </phpunit>

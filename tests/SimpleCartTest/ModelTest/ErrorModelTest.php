@@ -20,15 +20,20 @@ class ErrorModelTest extends PHPUnit_Framework_TestCase {
     {
         $staticData = [
             'name' => 'Firstname',
-            'message' => 'This is an error'
+            'message' => 'This is an error',
+            'secondMessage' => 'This is another error'
         ];
 
         $error = new ErrorModel();
         $error->setName($staticData['name']);
-        $error->setMessage($staticData['message']);
+        $error->addMessage($staticData['message']);
 
         $this->assertEquals($staticData['name'], $error->getName());
-        $this->assertEquals($staticData['message'], $error->getMessage());
+        $this->assertEquals($staticData['message'], current($error->getMessages()));
+
+        $error->addMessage($staticData['secondMessage']);
+
+        $this->assertCount(2, $error->getMessages());
     }
 
 }

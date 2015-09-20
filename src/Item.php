@@ -2,9 +2,33 @@
 namespace SimpleCart;
 
 use SimpleCart\Model\ItemModel;
+use SimpleCart\Validator\ItemValidator;
 
 class Item
 {
+
+    /**
+     * @var ItemValidator
+     */
+    private $itemValidator;
+
+    public function __construct()
+    {
+        $this->itemValidator = new ItemValidator();
+    }
+
+    /**
+     * @param ItemModel|array $data
+     */
+    public function addItem($data)
+    {
+        if (empty($data) || !is_array($data)) {
+            throw new \InvalidArgumentException("Item to add is either empty or not an array");
+        }
+
+        $this->itemValidator->setData($data);
+        $this->itemValidator->validate();
+    }
 
     /**
      * @param $id

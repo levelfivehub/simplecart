@@ -1,9 +1,10 @@
 <?php
 namespace SimpleCartTest;
 
+use SimpleCart\Exception\ValidationException;
 use SimpleCart\Item;
 use SimpleCart\Model\ItemModel;
-use SimpleCart\Exception\InvalidItemException;
+use InvalidArgumentException;
 
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,12 +45,26 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($itemContext['currency'], $generateModel->getCurrency());
     }
 
+    public function testAddItemWithEmptyReturnsException()
+    {
+        $this->setExpectedException(InvalidArgumentException::class, 'Item to add is either empty or not an array');
+        $data = null;
+        $this->item->addItem($data);
+    }
+
     public function testAddItemWithNoName()
     {
-        $this->markTestIncomplete('Working on Validator');
+        $this->setExpectedException(ValidationException::class);
 
-        $this->setExpectedException(InvalidItemException::class, 'Item Name not specified');
-        //$this->item->addItem();
+        $data = [
+            'name' => '',
+            'uniqueId' => '',
+            'amount' => '',
+            'quantity' => '',
+            'currency' => ''
+        ];
+
+        $this->item->addItem($data);
     }
 
 }
