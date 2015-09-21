@@ -1,13 +1,27 @@
 <?php
 namespace SimpleCart\Validator;
 
+use SimpleCart\Exception\ExceptionInterface;
+
 interface ValidatorInterface {
 
-    public function setData();
+    /**
+     * @param array $data
+     * @return bool|ExceptionInterface
+     */
+    public function setData(array $data);
 
+    /**
+     * @return bool
+     */
     public function validate();
 
-    public function addError();
+    /**
+     * @param string $name
+     * @param string $message
+     * @return bool
+     */
+    public function addError($name, $message);
 
     public function hasErrors();
 

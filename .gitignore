@@ -4,3 +4,5 @@ composer.phar
 cache/
 coverage/
 vendor/
+build/
+clover.xml
