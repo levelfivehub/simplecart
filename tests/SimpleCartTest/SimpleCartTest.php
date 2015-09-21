@@ -91,4 +91,41 @@ class SimpleCartTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(1, $this->simpleCart->getCartCount());
     }
 
+    public function testRemoveItemByUniqueId()
+    {
+        $this->simpleCart->clearCart();
+
+        $itemContext = [
+            'name' => 'Red Balloon',
+            'uniqueId' => 'R123',
+            'amount' => 10.99,
+            'quantity' => '3',
+            'currency' => 'GBP'
+        ];
+
+        $addItem = $this->simpleCart->addItem($itemContext);
+
+        $this->assertTrue($addItem);
+
+        $itemContext = [
+            'name' => 'Blue Balloon',
+            'uniqueId' => 'B123',
+            'amount' => 10.99,
+            'quantity' => '6',
+            'currency' => 'GBP'
+        ];
+
+        $addItem = $this->simpleCart->addItem($itemContext);
+
+        $this->assertTrue($addItem);
+
+        $this->assertCount(2, $this->simpleCart->getCart());
+        $this->assertEquals(2, $this->simpleCart->getCartCount());
+
+        $this->simpleCart->removeItem('B123');
+
+        $this->assertCount(1, $this->simpleCart->getCart());
+        $this->assertEquals(1, $this->simpleCart->getCartCount());
+    }
+
 }

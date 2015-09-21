@@ -33,8 +33,8 @@ class SimpleCart extends Item {
     }
 
     /**
-     * @param $uniqueId
-     * @param $quantity
+     * @param string $uniqueId
+     * @param int $quantity
      * @return bool
      */
     public function updateItemQuantity($uniqueId, $quantity)
@@ -44,6 +44,30 @@ class SimpleCart extends Item {
         /** @var ItemModel $item */
         $item = $this->getItemByUniqueId($uniqueId, $cart);
         $item->setQuantity($quantity);
+
+        $this->container->offsetSet('cart', $cart);
+
+        return true;
+    }
+
+    /**
+     * @param string $uniqueId
+     * @return bool
+     */
+    public function removeItem($uniqueId)
+    {
+        $cart = $this->getCart();
+
+        /** @var ItemModel $item */
+        $this->getItemByUniqueId($uniqueId, $cart);
+
+        /** @var ItemModel $cartItem */
+        foreach ($cart as $key => $cartItem) {
+            if ($cartItem->getUniqueId() == $uniqueId) {
+                unset($cart[$key]);
+                continue;
+            }
+        }
 
         $this->container->offsetSet('cart', $cart);
 
