@@ -17,6 +17,8 @@
  */
 namespace SimpleCart;
 
+use SimpleCart\Exception\InvalidFieldException;
+use SimpleCart\Exception\InvalidItemException;
 use Zend\Session\Container;
 use SimpleCart\Model\ItemModel;
 
@@ -45,8 +47,14 @@ class SimpleCart extends Item {
      */
     public function addItem(array $data)
     {
+        $cart = $this->getCart();
+
+        if ($this->itemUpdateRequired($data, $cart)) {
+            throw new InvalidItemException('Item already exists in cart.  Update is required.');
+        }
+
         $itemModel = $this->getItemModel($data);
-        $newCart = array_merge([ $itemModel ], $this->getCart());
+        $newCart = array_merge([ $itemModel ], $cart);
         $this->container->offsetSet('cart', $newCart);
 
         return true;
