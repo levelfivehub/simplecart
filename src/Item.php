@@ -29,7 +29,7 @@ class Item
 {
 
     /**
-     * @param $uniqueId
+     * @param string $uniqueId
      * @param array $cartItems
      * @return ItemModel
      */
@@ -47,6 +47,22 @@ class Item
 
     /**
      * @param array $data
+     * @param array $cart
+     * @return bool
+     */
+    public function itemUpdateRequired(array $data, array $cart)
+    {
+        try {
+            $this->getItemByUniqueId($data['uniqueId'], $cart);
+            return true;
+        } catch (InvalidFieldException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param array $data
+     * @return ItemModel
      */
     public function getItemModel($data)
     {
