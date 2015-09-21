@@ -1,6 +1,7 @@
 {
     "name": "levelfivehub/simplecart",
     "description": "A module to save items to a cart to proceed on a checkout process",
+    "keywords": ["shopping cart", "php", "simple cart"],
     "license": "BSD-3-Clause",
     "authors": [
         {
