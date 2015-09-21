@@ -36,4 +36,24 @@ class ErrorModelTest extends PHPUnit_Framework_TestCase {
         $this->assertCount(2, $error->getMessages());
     }
 
+    public function testMultipleErrors()
+    {
+        $staticData = [
+            'name' => 'Firstname',
+            'message' => 'This is an error',
+            'secondMessage' => 'This is another error'
+        ];
+
+        $error = new ErrorModel();
+        $error->setName($staticData['name']);
+        $error->setMessages(
+            [
+                $staticData['message'],
+                $staticData['secondMessage']
+            ]
+        );
+
+        $this->assertCount(2, $error->getMessages());
+    }
+
 }

@@ -145,6 +145,22 @@ class ItemValidatorTest extends PHPUnit_Framework_TestCase {
         $this->validator->validate();
     }
 
+    public function testInvalidCurrencyReturnsErrors()
+    {
+        $this->setExpectedException(ValidationException::class);
+
+        $data = [
+            'name' => 'Balloon',
+            'amount' => 'test',
+            'quantity' => 2,
+            'uniqueId' => '',
+            'currency' => []
+        ];
+
+        $this->validator->setData($data);
+        $this->validator->validate();
+    }
+
     public function testItemAddedIsValid()
     {
         $data = [

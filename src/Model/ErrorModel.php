@@ -62,12 +62,12 @@ class ErrorModel {
     }
 
     /**
-     * @param array $message
+     * @param array $messages
      * @return $this
      */
-    public function setMessages($message)
+    public function setMessages($messages)
     {
-        $this->message = $message;
+        $this->messages = $messages;
         return $this;
     }
 
