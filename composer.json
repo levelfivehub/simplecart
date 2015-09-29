@@ -16,12 +16,10 @@
     },
     "require": {
         "php": ">=5.5",
+        "phpunit/phpunit": "4.8.*",
+        "squizlabs/php_codesniffer": "1.5.*",
         "zendframework/zend-session": "2.5.2",
         "zendframework/zend-validator": "dev-master",
         "zendframework/zend-filter": "dev-master"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "4.8.*",
-        "squizlabs/php_codesniffer": "1.5.*"
     }
 }
