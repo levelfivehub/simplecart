@@ -1,6 +1,8 @@
-# Simple Cart 
+# Simple Cart for Zend Framework 2
 
 [![Build Status](https://travis-ci.org/levelfivehub/simplecart.svg)](https://travis-ci.org/levelfivehub/simplecart) [![Coverage Status](https://coveralls.io/repos/levelfivehub/simplecart/badge.svg?branch=develop&service=github)](https://coveralls.io/github/levelfivehub/simplecart?branch=develop)
+
+*Please note; this only works with Zend Framework 2 as we use the Zend Validator and Zend Session components*
 
 This simple cart cannot get any simpler.
 
