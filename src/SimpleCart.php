@@ -26,7 +26,8 @@ use SimpleCart\Model\ItemModel;
  * @author Gaurav Malhotra <gaurav@level5websites.com>
  * @license MIT
  */
-class SimpleCart extends Item {
+class SimpleCart extends Item
+{
 
     /**
      * @var Container
@@ -62,14 +63,16 @@ class SimpleCart extends Item {
 
     /**
      * @param string $uniqueId
-     * @param int $quantity
+     * @param int    $quantity
      * @return bool
      */
     public function updateItemQuantity($uniqueId, $quantity)
     {
         $cart = $this->getCart();
 
-        /** @var ItemModel $item */
+        /**
+ * @var ItemModel $item 
+*/
         $item = $this->getItemByUniqueId($uniqueId, $cart);
         $item->setQuantity($quantity);
 
@@ -86,10 +89,14 @@ class SimpleCart extends Item {
     {
         $cart = $this->getCart();
 
-        /** @var ItemModel $item */
+        /**
+ * @var ItemModel $item 
+*/
         $this->getItemByUniqueId($uniqueId, $cart);
 
-        /** @var ItemModel $cartItem */
+        /**
+ * @var ItemModel $cartItem 
+*/
         foreach ($cart as $key => $cartItem) {
             if ($cartItem->getUniqueId() == $uniqueId) {
                 unset($cart[$key]);
