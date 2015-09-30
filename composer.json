@@ -1,6 +1,6 @@
 {
     "name": "levelfivehub/simplecart",
-    "description": "A module to save items to a cart to proceed on a checkout process",
+    "description": "A Cart handling module for adding/updating/removing items.  This module is for Zend Framework 2 only.",
     "keywords": ["shopping cart", "php", "simple cart"],
     "license": "BSD-3-Clause",
     "authors": [
